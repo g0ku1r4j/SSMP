@@ -94,6 +94,55 @@ void tl_create_directory()
 	}
 }
 
+void tl_delete_directory()
+{
+    char dirname[20];
+    struct directory *ptr = tl_directory;
+    struct directory *preptr = NULL;
+    int found = 0;
+
+    printf("Enter the name of the directory to delete: ");
+    scanf("%s", dirname);
+
+    while (ptr != NULL)
+    {
+        if (strcmp(ptr->dirname, dirname) == 0)
+        {
+            found = 1;
+            break;
+        }
+        preptr = ptr;
+        ptr = ptr->next;
+    }
+
+    if (found)
+    {
+        if (ptr->flstart != NULL)
+        {
+            printf("Directory '%s' is not empty. Deletion failed.\n", dirname);
+        }
+        else
+        {
+            if (ptr == tl_directory)
+            {
+                tl_directory = ptr->next;
+            }
+            else
+            {
+                preptr->next = ptr->next;
+            }
+
+            free(ptr);
+            printf("Directory '%s' deleted successfully.\n", dirname);
+            tl_display();
+        }
+    }
+    else
+    {
+        printf("Directory '%s' not found.\n", dirname);
+    }
+}
+
 void tl_create_file()
 {
 	int flag = 0;
@@ -250,29 +299,37 @@ void tl_search()
 
 void main()
 {
-	int choice;
+    int choice;
 
-	printf("Enter name of the root directory: ");
-	scanf("%s", two_level_root);
+    printf("Enter name of the root directory: ");
+    scanf("%s", two_level_root);
 
-	do
-	{
-		printf("\n\tMENU\n");
-		printf("1. Create directory\n2. Create file\n3. Delete file\n4. Search file\n5. Display files\n6. Exit\n");
-		printf("Enter choice: ");
-		scanf("%d", &choice);
-		switch (choice)
-		{
-			case 1: tl_create_directory();
-				break;
-			case 2: tl_create_file();
-				break;
-			case 3: tl_delete();
-				break;
-			case 4: tl_search();
-				break;
-			case 5: tl_display();
-				break;
-		}
-	} while (choice >= 1 && choice <= 5);
+    do
+    {
+        printf("\n\tMENU\n");
+        printf("1. Create directory\n");
+        printf("2. Create file\n");
+        printf("3. Delete file\n");
+        printf("4. Delete directory\n");
+        printf("5. Search file\n");
+        printf("6. Display files\n");
+        printf("7. Exit\n");
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+        switch (choice)
+        {
+            case 1: tl_create_directory();
+                break;
+            case 2: tl_create_file();
+                break;
+            case 3: tl_delete();
+                break;
+            case 4: tl_delete_directory();
+                break;
+            case 5: tl_search();
+                break;
+            case 6: tl_display();
+                break;
+        }
+    } while (choice >= 1 && choice <= 6);
 }
