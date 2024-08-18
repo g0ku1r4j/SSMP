@@ -93,7 +93,7 @@ void main()
 
     srand(time(NULL));
 
-    printf("Yadul Manoj\t69\n");
+    printf("Gokul Raj\t69\n");
     printf("Enter total no. of blocks: ");
     scanf("%d", &total_blocks);
 
