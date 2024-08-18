@@ -37,7 +37,6 @@ void create()
     {
         if (files[i].start != -1)
         {
-            // Check if other files have used similar starting block
             if (files[file_count].start == files[i].start)
             {
                 printf("Starting block already allocated.\n");
