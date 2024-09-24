@@ -1,8 +1,8 @@
 .MODEL SMALL
 .STACK 100H
 .DATA
-	A DW 1234H      ; Define word A with value 1234H
-	B DW 5678H      ; Define word B with value 5678H
+	A DW 6090H      ; Define word A with value 1234H
+	B DW 9060H      ; Define word B with value 5678H
 .CODE
 	MOV AX, @DATA   ; Initialize data segment
 	MOV DS, AX
